@@ -1,0 +1,24 @@
+<div *ngIf="recipe">
+    <h1><button type="button" class="btn btn-light" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>         {{recipe.name}}</h1>
+
+    <table class="table table-bordered table-hover table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Naam</th>
+                <th scope="col">Dosering</th>
+                <th scope="col">Type Dosering</th>
+                <th scope="col">Beschrijving</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" [(ngModel)]="recipe.name" /></td>
+                <td><input type="text" [(ngModel)]="recipe.dosage" /></td>
+                <td><input type="text" [(ngModel)]="recipe.dosageType" /></td>
+                <textarea rows="4" cols="50" [(ngModel)]="recipe.description"></textarea>
+            </tr>
+        </tbody>
+      </table>
+    
+      <button type="button" class="btn btn-success" (click)="updateRecipe()"><i class="fa fa-save"></i> Opslaan</button>
+</div>

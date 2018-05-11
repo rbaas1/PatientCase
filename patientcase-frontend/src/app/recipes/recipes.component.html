@@ -1,0 +1,42 @@
+<h1>Recepten</h1>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNewRecipe" aria-expanded="false" aria-controls="collapseNewRecipe">
+    <i class="fa fa-folder"></i> <strong>+</strong>
+</button>
+
+<div class="collapse" id="collapseNewRecipe">
+    <div class="card card-body">
+        <form (ngSubmit)="newRecipe()">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input [(ngModel)]="newRecipeName" name="name" type="text" class="form-control" id="name" placeholder="Naam">
+            </div>
+            <div class="form-group">
+                <label for="dosage">Dosering</label>
+                <input [(ngModel)]="newRecipeDosage" name="dosage" type="number" class="form-control" id="lastName" placeholder="Dosering">
+            </div>
+            <div class="form-group">
+                <label for="dosageType">Type Dosering</label>
+                <input [(ngModel)]="newRecipeDosageType" name="dosageType" type="text" class="form-control" id="dosageType" placeholder="Type Dosering">
+            </div>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Opslaan</button>
+        </form>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Dosering</th>
+            <th scope="col"><i class="fa fa-info"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of recipes">
+            <td>{{r.name}}</td>
+            <td>{{r.dosage}} {{r.dosageType}}</td>
+            <td><a href="/recept/{{r.name}}">Details</a></td>
+        </tr>
+    </tbody>
+</table>

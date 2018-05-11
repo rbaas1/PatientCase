@@ -1,0 +1,45 @@
+<h1>Patiënten</h1>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNewPatient" aria-expanded="false" aria-controls="collapseNewPatient">
+    <i class="fa fa-user"></i> <strong>+</strong>
+</button>
+
+<div class="collapse" id="collapseNewPatient">
+    <div class="card card-body">
+        <form (ngSubmit)="newPatient()">
+            <div class="form-group">
+                <label for="firstName">Voornaam</label>
+                <input [(ngModel)]="newPatientFirstName" name="firstName" type="text" class="form-control" id="firstName" placeholder="Voornaam">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Achternaam</label>
+                <input [(ngModel)]="newPatientLastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Achternaam">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Geboortedatum</label>
+                <input [(ngModel)]="newPatientBirthDate" name="birthDate" type="date" class="form-control" id="birthDate">
+            </div>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Opslaan</button>
+        </form>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Voornaam</th>
+            <th scope="col">Achternaam</th>
+            <th scope="col">Geboortedatum</th>
+            <th scope="col"><i class="fa fa-info"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of patients">
+            <td>{{p.id}}</td>
+            <td>{{p.firstName}}</td>
+            <td>{{p.lastName}}</td>
+            <td>{{p.birthDate}}</td>
+            <td><a href="/patient/{{p.id}}">Details</a></td>
+        </tr>
+    </tbody>
+</table>

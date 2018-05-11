@@ -1,0 +1,88 @@
+<div *ngIf="patient">
+  <h1>  <button type="button" class="btn btn-light" (click)="goBack()"><i class="fa fa-arrow-left"></i> Terug</button>     {{patient.firstName}} {{patient.lastName}}</h1>
+
+  <table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Voornaam</th>
+            <th scope="col">Achternaam</th>
+            <th scope="col">BSN</th>
+            <th scope="col">Geboortedatum</th>
+            <th scope="col">Geslacht</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" [(ngModel)]="patient.firstName" /></td>
+            <td><input type="text" [(ngModel)]="patient.lastName" /></td>
+            <td><input type="text" [(ngModel)]="patient.bsn" minlength="8" maxlength="9" /></td>
+            <td><input type="date" [(ngModel)]="patient.birthDate" /></td>
+            <td>
+              <select name="Geslacht" [(ngModel)]="patient.gender">
+                <option value="m">Man</option>
+                <option value="v">Vrouw</option>
+                <option value="o">Overig</option>
+              </select>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="table table-bordered table-hover table-sm">
+      <thead>
+          <tr>
+              <th scope="col">Thuisadres</th>
+              <th scope="col">Thuis postcode</th>
+              <th scope="col">Telefoonnummer</th>
+              <th scope="col">Werkadres</th>
+              <th scope="col">Werk postcode</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td><input type="text" [(ngModel)]="patient.homeAddress" /></td>
+              <td><input type="text" [(ngModel)]="patient.homePostcode" /></td>
+              <td><input type="text" [(ngModel)]="patient.phoneNumber" /></td>
+              <td><input type="text" [(ngModel)]="patient.workAddress" /></td>
+              <td><input type="text" [(ngModel)]="patient.workPostcode" /></td>
+          </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-success" (click)="updatePatient()"><i class="fa fa-save"></i> Opslaan</button>
+
+  <h2>Recepten</h2>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNewRecipe" aria-expanded="false" aria-controls="collapseNewRecipe">
+    <i class="fa fa-folder"></i> <strong>+</strong>
+</button>
+
+<div class="collapse" id="collapseNewRecipe">
+    <div class="card card-body">
+        <form (ngSubmit)="addRecipe()">
+            <div class="form-group">
+                <select [(ngModel)]="newRecipe" name="newRecipe">
+                    <option *ngFor="let r of recipes" [ngValue]="r">{{r.name}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Toevoegen</button>
+        </form>
+    </div>
+</div>
+<br>
+  <table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Dosering</th>
+            <th scope="col" colspan="2"><i class="fa fa-info"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of patient.recipes">
+            <td>{{r.name}}</td>
+            <td>{{r.dosage}} {{r.dosageType}}</td>
+            <td><a href="/recept/{{r.name}}">Details</a></td>
+            <td><button type="button" class="btn btn-danger btn-sm" (click)="removeRecipe(r)"><i class="fa fa-trash"></i></button></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
